@@ -1,4 +1,4 @@
-import { sanitizeParams } from "./helpers";
+const { sanitizeParams } = require("./helpers");
 
 interface Caster {
   events: {};
