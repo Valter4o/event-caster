@@ -10,9 +10,10 @@
   ],
   "scripts": {
     "test": "jest",
+    "dev": "tsc -w",
     "build": "tsc"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^27.0.5",
     "typescript": "^4.3.4"
