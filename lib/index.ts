@@ -1,3 +1,5 @@
+import { sanitizeParams } from "./helpers";
+
 interface Caster {
   events: {};
   options: any;
@@ -10,19 +12,6 @@ interface Caster {
   removeAllListeners: () => void;
   eventNames: () => string[];
   clearSubs: (eventName: string) => void;
-}
-
-function sanitizeParams(params: any) {
-  const sanitizedData: any = {};
-  const paramKeys = Object.keys(params);
-  for (let ind = 0; ind < paramKeys.length; ind++) {
-    const param: string = paramKeys[ind];
-    const isParamPrivate: boolean = param[0] === "_";
-    if (!isParamPrivate) {
-      sanitizedData[param] = params[param];
-    }
-  }
-  return sanitizedData
 }
 
 function cast(eventName: string, params?: any): void {
@@ -110,4 +99,4 @@ const caster: Caster = {
   clearSubs,
 };
 
-export default caster as Caster;
+module.exports = caster;
