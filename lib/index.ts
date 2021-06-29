@@ -22,6 +22,7 @@ function cast(eventName: string, params?: any): void {
       const sanitizedParams = !!params ? sanitizeParams(params) : {};
       sub.cb(sanitizedParams);
       if (sub.once) {
+        // Todo: Refactor, this will break
         this.events[eventName].subs = [
           ...subs.slice(0, 1),
           ...subs.slice(i + 1),
@@ -36,7 +37,7 @@ function cast(eventName: string, params?: any): void {
 }
 
 function on(eventName: string, cb: Function, options = {}): void {
-  if (this.hasOwnProperty(eventName)) {
+  if (this.events.hasOwnProperty(eventName)) {
     this.events[eventName].subs.push({ cb, ...options });
   } else {
     this.events[eventName] = {
@@ -46,7 +47,7 @@ function on(eventName: string, cb: Function, options = {}): void {
 }
 
 function once(eventName: string, cb: Function) {
-  if (this.hasOwnProperty(eventName)) {
+  if (this.events.hasOwnProperty(eventName)) {
     this.events[eventName].subs.push({ cb, once: true });
   } else {
     this.events[eventName] = {
